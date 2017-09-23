@@ -1,0 +1,28 @@
+{
+  "name": "floatcoin-miner",
+  "version": "1.0.0",
+  "description": "Demo miner for Floatcoin",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/index.js",
+    "build": "pkg index.js --out-path build && cp -r resources build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mesquka/floatcoin"
+  },
+  "author": "Kieran Mesquita <kieran.mesquita@launchmii.com.au>",
+  "license": "MIT",
+  "dependencies": {
+    "asyncawait": "^1.0.6",
+    "bignumber.js": "^4.0.4",
+    "inquirer": "^3.3.0",
+    "js-sha256": "^0.6.0",
+    "js-sha3": "^0.6.1",
+    "ripemd160": "^2.0.1",
+    "web3": "^1.0.0-beta.20"
+  },
+  "devDependencies": {
+    "pkg": "^4.2.4"
+  }
+}
