@@ -34,9 +34,7 @@ async function start(){
         await api.getBalance(answers.account).then((balance) => {
             console.log("Balance: " + balance + " FC");
         });
-        setInterval(function(){
-            api.unlockAccount(answers.account, answers.password);
-        }, 10000);
+        api.setPassword(answers.password);
         miner(answers.algorithm, answers.account);
     });
 }

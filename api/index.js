@@ -4,7 +4,17 @@ const fs = require('fs');
 const abi = fs.readFileSync('resources/floatcoin_abi.json', 'utf-8');
 const FloatCoin = new web3.eth.Contract(JSON.parse(abi));
 
-FloatCoin.options.address = '0xc2A0B4F1401E3B9F8F2b9bc524c5a4d8d9556244';
+var password = "";
+
+FloatCoin.options.address = '0x1a7c96cd8b9cc80aFD0591f81ABc47725d2B33F4';
+
+function setPassword(pass){
+    password = pass;
+}
+
+async function unlockAccount(address) {
+    return await web3.eth.personal.unlockAccount(address, password);
+}
 
 async function getBalance(address) {
     var balance;
@@ -15,6 +25,7 @@ async function getBalance(address) {
 }
 
 function claimDoubleSHA256Reward(address, nonce){
+    await unlockAccount(address);
     FloatCoin.methods.claimDoubleSHA256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', function(receipt){
@@ -28,6 +39,7 @@ function claimDoubleSHA256Reward(address, nonce){
 }
 
 function claimKeccak256Reward(address, nonce){
+    await unlockAccount(address);
     FloatCoin.methods.claimKeccak256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', function(receipt){
@@ -41,6 +53,7 @@ function claimKeccak256Reward(address, nonce){
 }
 
 function claimRipeMD160Reward(address, nonce){
+    await unlockAccount(address);
     FloatCoin.methods.claimRipeMD160Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', function(receipt){
@@ -59,10 +72,6 @@ async function getAccounts() {
         addresses = result;
     });
     return addresses;
-}
-
-async function unlockAccount(address, password) {
-    return await web3.eth.personal.unlockAccount(address, password);
 }
 
 function watchDoubleSHA256(handler) {
@@ -125,12 +134,14 @@ async function getRipeMD160Challenge() {
     return challenge;
 }
 
+
+module.exports.setPassword = setPassword;
+module.exports.unlockAccount = unlockAccount;
 module.exports.getBalance = getBalance;
 module.exports.claimDoubleSHA256Reward = claimDoubleSHA256Reward;
 module.exports.claimKeccak256Reward = claimKeccak256Reward;
 module.exports.claimRipeMD160Reward = claimRipeMD160Reward;
 module.exports.getAccounts = getAccounts;
-module.exports.unlockAccount = unlockAccount;
 module.exports.watchDoubleSHA256 = watchDoubleSHA256;
 module.exports.watchKeccak256 = watchKeccak256;
 module.exports.watchRipeMD160 = watchRipeMD160;
