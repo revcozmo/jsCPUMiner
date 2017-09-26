@@ -28,12 +28,12 @@ function claimDoubleSHA256Reward(address, nonce){
 }
 
 function claimKeccak256Reward(address, nonce){
-    FloatCoin.methods.claimDoubleSHA256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
+    FloatCoin.methods.claimKeccak256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed");
-            console.log(receipt.events);
+            console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
+            console.log("Current Balance: " + getBalance(address));
         } else {
             console.log("Failed to claim mining rewards");
         }
@@ -45,8 +45,8 @@ function claimRipeMD160Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed");
-            console.log(receipt.events);
+            console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
+            console.log("Current Balance: " + getBalance(address));
         } else {
             console.log("Failed to claim mining rewards");
         }
