@@ -28,16 +28,24 @@ async function claimDoubleSHA256Reward(address, nonce){
     await unlockAccount(address);
     FloatCoin.methods.claimDoubleSHA256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
-    }).on('receipt', function(receipt){
+    }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
             console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
-            console.log("Current Balance: " + getBalance(address));
+            var balance;
+            await getBalance(address).then(function(result){
+                balance = result;
+            });
+            console.log("Current Balance: " + balance + " ⚖");
         } else {
             console.log("Failed to claim mining rewards");
         }
-    }).on('error', function(err){
+    }).on('error', async function(err){
         console.log("Claim transaction was not mined within 50 blocks.");
-        console.log("Current Balance: " + getBalance(address));
+        var balance;
+        await getBalance(address).then(function(result){
+            balance = result;
+        });
+        console.log("Current Balance: " + balance + " ⚖");
     });
 }
 
@@ -45,16 +53,24 @@ async function claimKeccak256Reward(address, nonce){
     await unlockAccount(address);
     FloatCoin.methods.claimKeccak256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
-    }).on('receipt', function(receipt){
+    }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
             console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
-            console.log("Current Balance: " + getBalance(address));
+            var balance;
+            await getBalance(address).then(function(result){
+                balance = result;
+            });
+            console.log("Current Balance: " + balance + " ⚖");
         } else {
             console.log("Failed to claim mining rewards");
         }
-    }).on('error', function(err){
+    }).on('error', async function(err){
         console.log("Claim transaction was not mined within 50 blocks.");
-        console.log("Current Balance: " + getBalance(address));
+        var balance;
+        await getBalance(address).then(function(result){
+            balance = result;
+        });
+        console.log("Current Balance: " + balance + " ⚖");
     });
 }
 
@@ -62,16 +78,24 @@ async function claimRipeMD160Reward(address, nonce){
     await unlockAccount(address);
     FloatCoin.methods.claimRipeMD160Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
-    }).on('receipt', function(receipt){
+    }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
             console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
-            console.log("Current Balance: " + getBalance(address));
+            var balance;
+            await getBalance(address).then(function(result){
+                balance = result;
+            });
+            console.log("Current Balance: " + balance + " ⚖");
         } else {
             console.log("Failed to claim mining rewards");
         }
-    }).on('error', function(err){
+    }).on('error', async function(err){
         console.log("Claim transaction was not mined within 50 blocks.");
-        console.log("Current Balance: " + getBalance(address));
+        var balance;
+        await getBalance(address).then(function(result){
+            balance = result;
+        });
+        console.log("Current Balance: " + balance + " ⚖");
     });
 }
 

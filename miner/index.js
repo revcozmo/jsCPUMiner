@@ -15,8 +15,6 @@ var hashfunc;
 var lastSubmission = Date.now();
 
 async function getVars() {
-    var oldDiff = difficulty;
-    var oldChall = challenge;
     await getChallenge().then((chall) => {
         challenge = chall.substring(2);
     });
@@ -25,10 +23,13 @@ async function getVars() {
         difficulty = new BigNumber(maxDiff).dividedBy(diff).toString(16);
         difficulty = difficulty.substring(0, difficulty.indexOf('.'));
     });
-    if(oldChall != challenge && oldDiff != difficulty){
-        console.log("Difficulty: " + new BigNumber(diffRaw).toFixed());
-        console.log("Challenge: " + challenge);
-    }
+    process.send({
+        type: "vars",
+        msg: {
+            difficulty: new BigNumber(diffRaw).toFixed(),
+            challenge: challenge
+        }
+    });
 }
 
 function foundCB(solution) {
@@ -54,8 +55,11 @@ function hash() {
         if (util.greaterThan(difficulty, hash)){
             foundCB("0x" + util.bytesToHex(noncebytes));
         }
-        if (Date.now() - lastCheck >= 5000){
-            console.log(util.numToSI((hashcount)/5));
+        if (Date.now() - lastCheck >= 500){
+            process.send({
+                type: "hash",
+                msg: hashcount
+            });
             lastCheck = Date.now();
             hashcount = 0;
         }
@@ -74,7 +78,6 @@ module.exports = async function(algorithm, addr) {
             getChallenge = api.getDoubleSHA256Challenge;
             claim = api.claimDoubleSHA256Reward;
             hashfunc = require("../hash/doubleSHA256");
-            //api.watchDoubleSHA256(console.log);
             break;
         case "Keccak256":
             maxDiff = new BigNumber("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", 16);
@@ -82,7 +85,6 @@ module.exports = async function(algorithm, addr) {
             getChallenge = api.getKeccak256Challenge;
             claim = api.claimKeccak256Reward;
             hashfunc = require("../hash/keccak256");
-            //api.watchKeccak256(console.log);
             break;
         case "RipeMD160":
             maxDiff = new BigNumber("ffffffffffffffffffffffffffffffffffffffff", 16);
@@ -90,7 +92,6 @@ module.exports = async function(algorithm, addr) {
             getChallenge = api.getRipeMD160Challenge;
             claim = api.claimRipeMD160Reward;
             hashfunc = require("../hash/ripemd160");
-            //api.watchRipeMD160(console.log);
             break;
         default:
             throw "No algorithm specified";
