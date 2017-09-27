@@ -51,12 +51,21 @@ async function start(){
             name: 'algorithm',
             message: 'Algorithm',
             choices: ["Double Sha256", "Keccak256", "RipeMD160"]
+        },
+        {
+            type: 'confirm',
+            name: 'multiThread',
+            message: 'MultiThreaded?',
+            default: true
         }
     ];
     inquirer.prompt(questions).then(async function (answers) {
         await api.getBalance(answers.account).then((balance) => {
             console.log("Balance: " + balance + " EQC");
         });
+        if (answers.multiThread = false){
+            numCPUs = 1;
+        }
         for (var i = 0; i < numCPUs; i++) {
             var worker = cluster.fork(answers);
             worker.on('message', function(msg){
