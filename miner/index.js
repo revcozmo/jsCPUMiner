@@ -8,7 +8,6 @@ var getDiff;
 var getChallenge;
 var challenge = "FF";
 var difficulty = 1;
-var intensity = 1;
 var diffRaw;
 var claim;
 var hashfunc;
@@ -47,30 +46,26 @@ function hash() {
     function hashloop() {
         var challengeBytes = util.hexToBytes(challenge);
         var noncebytes = new Array(32);
-        var i = 0;
-        for (var i = 0; i < intensity; i++) {
-            for (var i = 0; i < noncebytes.length; i++) {
-                noncebytes[i] = util.randomInt(0,255);
-            }
-            var hashme = noncebytes.concat(challengeBytes);
-            var hash = hashfunc(hashme);
-            if (util.greaterThan(difficulty, hash)){
-                foundCB("0x" + util.bytesToHex(noncebytes));
-            }
-            if (Date.now() - lastCheck >= 5000){
-                console.log(util.numToSI((hashcount)/5));
-                lastCheck = Date.now();
-                hashcount = 0;
-            }
-            hashcount++;
+        for (var i = 0; i < noncebytes.length; i++) {
+            noncebytes[i] = util.randomInt(0,255);
         }
+        var hashme = noncebytes.concat(challengeBytes);
+        var hash = hashfunc(hashme);
+        if (util.greaterThan(difficulty, hash)){
+            foundCB("0x" + util.bytesToHex(noncebytes));
+        }
+        if (Date.now() - lastCheck >= 5000){
+            console.log(util.numToSI((hashcount)/5));
+            lastCheck = Date.now();
+            hashcount = 0;
+        }
+        hashcount++;
         setImmediate(hashloop);
     }
     hashloop();
 }
 
-module.exports = async function(algorithm, addr, intens) {
-    intensity = intens*10;
+module.exports = async function(algorithm, addr) {
     address = addr;
     switch(algorithm) {
         case "Double Sha256":
