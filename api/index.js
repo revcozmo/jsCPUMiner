@@ -36,7 +36,8 @@ async function claimDoubleSHA256Reward(address, nonce){
             console.log("Failed to claim mining rewards");
         }
     }).on('error', function(err){
-        console.log("Claim transaction was not mined within 50 blocks.")
+        console.log("Claim transaction was not mined within 50 blocks.");
+        console.log("Current Balance: " + getBalance(address));
     });
 }
 
@@ -51,6 +52,9 @@ async function claimKeccak256Reward(address, nonce){
         } else {
             console.log("Failed to claim mining rewards");
         }
+    }).on('error', function(err){
+        console.log("Claim transaction was not mined within 50 blocks.");
+        console.log("Current Balance: " + getBalance(address));
     });
 }
 
@@ -65,6 +69,9 @@ async function claimRipeMD160Reward(address, nonce){
         } else {
             console.log("Failed to claim mining rewards");
         }
+    }).on('error', function(err){
+        console.log("Claim transaction was not mined within 50 blocks.");
+        console.log("Current Balance: " + getBalance(address));
     });
 }
 
