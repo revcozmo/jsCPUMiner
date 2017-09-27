@@ -6,7 +6,7 @@ const FloatCoin = new web3.eth.Contract(JSON.parse(abi));
 
 var password = "";
 
-FloatCoin.options.address = '0x1a7c96cd8b9cc80aFD0591f81ABc47725d2B33F4';
+FloatCoin.options.address = '0x6701b36B2d6c0D7030884b1c33f32392047da1aC';
 
 function setPassword(pass){
     password = pass;
@@ -24,7 +24,7 @@ async function getBalance(address) {
     return balance;
 }
 
-function claimDoubleSHA256Reward(address, nonce){
+async function claimDoubleSHA256Reward(address, nonce){
     await unlockAccount(address);
     FloatCoin.methods.claimDoubleSHA256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
@@ -35,10 +35,12 @@ function claimDoubleSHA256Reward(address, nonce){
         } else {
             console.log("Failed to claim mining rewards");
         }
+    }).on('error', function(err){
+        console.log("Claim transaction was not mined within 50 blocks.")
     });
 }
 
-function claimKeccak256Reward(address, nonce){
+async function claimKeccak256Reward(address, nonce){
     await unlockAccount(address);
     FloatCoin.methods.claimKeccak256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
@@ -52,7 +54,7 @@ function claimKeccak256Reward(address, nonce){
     });
 }
 
-function claimRipeMD160Reward(address, nonce){
+async function claimRipeMD160Reward(address, nonce){
     await unlockAccount(address);
     FloatCoin.methods.claimRipeMD160Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
