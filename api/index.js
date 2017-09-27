@@ -30,12 +30,12 @@ async function claimDoubleSHA256Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
+            console.log("Mining Reward Claimed: " + receipt.events);
             var balance;
             await getBalance(address).then(function(result){
                 balance = result;
             });
-            console.log("Current Balance: " + balance + " ⚖");
+            console.log("Current Balance: " + balance + " EQC");
         } else {
             console.log("Failed to claim mining rewards");
         }
@@ -45,7 +45,7 @@ async function claimDoubleSHA256Reward(address, nonce){
         await getBalance(address).then(function(result){
             balance = result;
         });
-        console.log("Current Balance: " + balance + " ⚖");
+        console.log("Current Balance: " + balance + " EQC");
     });
 }
 
@@ -55,12 +55,12 @@ async function claimKeccak256Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
+            console.log("Mining Reward Claimed: " + receipt.events);
             var balance;
             await getBalance(address).then(function(result){
                 balance = result;
             });
-            console.log("Current Balance: " + balance + " ⚖");
+            console.log("Current Balance: " + balance + " EQC");
         } else {
             console.log("Failed to claim mining rewards");
         }
@@ -70,7 +70,7 @@ async function claimKeccak256Reward(address, nonce){
         await getBalance(address).then(function(result){
             balance = result;
         });
-        console.log("Current Balance: " + balance + " ⚖");
+        console.log("Current Balance: " + balance + " EQC");
     });
 }
 
@@ -80,12 +80,12 @@ async function claimRipeMD160Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed (" + receipt.events[0].returnValues.value/10**16 + " FC)");
+            console.log("Mining Reward Claimed: " + receipt.events);
             var balance;
             await getBalance(address).then(function(result){
                 balance = result;
             });
-            console.log("Current Balance: " + balance + " ⚖");
+            console.log("Current Balance: " + balance + " EQC");
         } else {
             console.log("Failed to claim mining rewards");
         }
@@ -95,7 +95,7 @@ async function claimRipeMD160Reward(address, nonce){
         await getBalance(address).then(function(result){
             balance = result;
         });
-        console.log("Current Balance: " + balance + " ⚖");
+        console.log("Current Balance: " + balance + " EQC");
     });
 }
 

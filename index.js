@@ -55,7 +55,7 @@ async function start(){
     ];
     inquirer.prompt(questions).then(async function (answers) {
         await api.getBalance(answers.account).then((balance) => {
-            console.log("Balance: " + balance + " ⚖");
+            console.log("Balance: " + balance + " EQC");
         });
         for (var i = 0; i < numCPUs; i++) {
             var worker = cluster.fork(answers);
