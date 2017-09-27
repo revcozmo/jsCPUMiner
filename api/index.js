@@ -1,12 +1,11 @@
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-const fs = require('fs');
-const abi = fs.readFileSync('resources/floatcoin_abi.json', 'utf-8');
-const FloatCoin = new web3.eth.Contract(JSON.parse(abi));
+const abi = require('../resources/floatcoin_abi.js');
+const FloatCoin = new web3.eth.Contract(abi);
 
 var password = "";
 
-FloatCoin.options.address = '0x6701b36B2d6c0D7030884b1c33f32392047da1aC';
+FloatCoin.options.address = '0x44A850a1640A5E8F029D60e3467106E327206B2C';
 
 function setPassword(pass){
     password = pass;
