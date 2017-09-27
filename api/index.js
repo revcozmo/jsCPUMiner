@@ -30,7 +30,7 @@ async function claimDoubleSHA256Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed: " + receipt.events);
+            console.log("Mining Reward Claimed");
             var balance;
             await getBalance(address).then(function(result){
                 balance = result;
@@ -55,7 +55,7 @@ async function claimKeccak256Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed: " + receipt.events);
+            console.log("Mining Reward Claimed");
             var balance;
             await getBalance(address).then(function(result){
                 balance = result;
@@ -80,7 +80,7 @@ async function claimRipeMD160Reward(address, nonce){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
-            console.log("Mining Reward Claimed: " + receipt.events);
+            console.log("Mining Reward Claimed");
             var balance;
             await getBalance(address).then(function(result){
                 balance = result;
