@@ -1,7 +1,7 @@
 {
-  "name": "floatcoin-miner",
+  "name": "equicoin-miner",
   "version": "1.0.0",
-  "description": "Demo miner for Floatcoin",
+  "description": "Demo miner for EquiCoin",
   "main": "index.js",
   "scripts": {
     "test": "node tests/index.js",

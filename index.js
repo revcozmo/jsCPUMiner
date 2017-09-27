@@ -27,6 +27,12 @@ async function start(){
             name: 'algorithm',
             message: 'Algorithm',
             choices: ["Double Sha256", "Keccak256", "RipeMD160"]
+        },
+        {
+            type: 'input',
+            name: 'intensity',
+            message: 'Intensity (5 Recommended)',
+            filter: Number
         }
     ];
     inquirer.prompt(questions).then(async function (answers) {
@@ -35,7 +41,7 @@ async function start(){
             console.log("Balance: " + balance + " FC");
         });
         api.setPassword(answers.password);
-        miner(answers.algorithm, answers.account);
+        miner(answers.algorithm, answers.account, answers.intensity);
     });
 }
 
