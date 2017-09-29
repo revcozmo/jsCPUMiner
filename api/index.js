@@ -5,7 +5,7 @@ const FloatCoin = new web3.eth.Contract(abi);
 
 var password = "";
 
-FloatCoin.options.address = '0x44A850a1640A5E8F029D60e3467106E327206B2C';
+FloatCoin.options.address = '0xb9D65389cFAE5B64fA666ef222038Aa5AEB0772c';
 
 function setPassword(pass){
     password = pass;

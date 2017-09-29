@@ -1,24 +1,5 @@
 module.exports = [
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "nonce",
-        "type": "bytes32"
-      }
-    ],
-    "name": "claimRipeMD160Reward",
-    "outputs": [
-      {
-        "name": "success",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "name",
@@ -167,25 +148,6 @@ module.exports = [
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "nonce",
-        "type": "bytes32"
-      }
-    ],
-    "name": "claimDoubleSHA256Reward",
-    "outputs": [
-      {
-        "name": "success",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "decimals",
@@ -222,6 +184,29 @@ module.exports = [
       }
     ],
     "name": "burn",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "nonce",
+        "type": "bytes32"
+      },
+      {
+        "name": "poolNonce",
+        "type": "bytes32"
+      }
+    ],
+    "name": "claimDoubleSHA256Reward",
     "outputs": [
       {
         "name": "success",
@@ -272,6 +257,29 @@ module.exports = [
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "nonce",
+        "type": "bytes32"
+      },
+      {
+        "name": "poolNonce",
+        "type": "bytes32"
+      }
+    ],
+    "name": "claimRipeMD160Reward",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -460,10 +468,28 @@ module.exports = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "MergedReward",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
         "name": "nonce",
+        "type": "bytes32"
+      },
+      {
+        "name": "poolNonce",
         "type": "bytes32"
       }
     ],
@@ -476,20 +502,6 @@ module.exports = [
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "MergedReward",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
