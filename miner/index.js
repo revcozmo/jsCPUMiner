@@ -2,6 +2,7 @@ const BigNumber = require("bignumber.js");
 const api = require('../api');
 const util = require("../utils");
 
+const zerodPoolHash = new Array(5+1).join('0').split('').map(parseFloat);
 var address;
 var maxDiff;
 var getDiff;
@@ -35,7 +36,8 @@ async function getVars() {
 function foundCB(solution) {
     if (Date.now() - lastSubmission >= 20000){
         console.log("Found Solution: " + solution);
-        claim(address, solution);
+        const poolNonce = "0x" + util.bytesToHex(hashfunc(zerodPoolHash));
+        claim(address, solution, poolNonce);
         lastSubmission = Date.now();
     }
 }
@@ -50,7 +52,7 @@ function hash() {
         for (var i = 0; i < noncebytes.length; i++) {
             noncebytes[i] = util.randomInt(0,255);
         }
-        var hashme = noncebytes.concat(challengeBytes);
+        var hashme = noncebytes.concat(zerodPoolHash).concat(challengeBytes);
         var hash = hashfunc(hashme);
         if (util.greaterThan(difficulty, hash)){
             foundCB("0x" + util.bytesToHex(noncebytes));

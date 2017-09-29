@@ -23,9 +23,9 @@ async function getBalance(address) {
     return balance;
 }
 
-async function claimDoubleSHA256Reward(address, nonce){
+async function claimDoubleSHA256Reward(address, nonce, poolNonce){
     await unlockAccount(address);
-    FloatCoin.methods.claimDoubleSHA256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
+    FloatCoin.methods.claimDoubleSHA256Reward(nonce, poolNonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
@@ -48,9 +48,9 @@ async function claimDoubleSHA256Reward(address, nonce){
     });
 }
 
-async function claimKeccak256Reward(address, nonce){
+async function claimKeccak256Reward(address, nonce, poolNonce){
     await unlockAccount(address);
-    FloatCoin.methods.claimKeccak256Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
+    FloatCoin.methods.claimKeccak256Reward(nonce, poolNonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
@@ -73,9 +73,9 @@ async function claimKeccak256Reward(address, nonce){
     });
 }
 
-async function claimRipeMD160Reward(address, nonce){
+async function claimRipeMD160Reward(address, nonce, poolNonce){
     await unlockAccount(address);
-    FloatCoin.methods.claimRipeMD160Reward(nonce).send({from: address}).on('transactionHash', function(txhash){
+    FloatCoin.methods.claimRipeMD160Reward(nonce, poolNonce).send({from: address}).on('transactionHash', function(txhash){
         console.log("Claiming Mining Reward with TXID " + txhash);
     }).on('receipt', async function(receipt){
         if (Object.getOwnPropertyNames(receipt.events).length > 0){
