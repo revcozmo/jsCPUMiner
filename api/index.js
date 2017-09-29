@@ -5,7 +5,7 @@ const FloatCoin = new web3.eth.Contract(abi);
 
 var password = "";
 
-FloatCoin.options.address = '0xb9D65389cFAE5B64fA666ef222038Aa5AEB0772c';
+FloatCoin.options.address = '0x622888B2193505953a8a6CC87428452Ba92D4360';
 
 function setPassword(pass){
     password = pass;
@@ -18,7 +18,7 @@ async function unlockAccount(address) {
 async function getBalance(address) {
     var balance;
     await FloatCoin.methods.balanceOf(address).call().then((result) => {
-        balance = result/10**16;
+        balance = result/10**18;
     })
     return balance;
 }
