@@ -2,7 +2,7 @@ const BigNumber = require("bignumber.js");
 const api = require('../api');
 const util = require("../utils");
 
-const zerodPoolNonce = new Array(5+1).join('0').split('').map(parseFloat);
+const zerodPoolNonce = Array.apply(null, Array(32)).map(Number.prototype.valueOf,0);
 var address;
 var maxDiff;
 var getDiff;
@@ -46,7 +46,7 @@ function hash() {
     var hashcount = 0;
     var lastCheck = Date.now();
 
-    const zerodPoolHash = util.hexToBytes(hashfunc(zerodPoolNonce));
+    const zerodPoolHash = hashfunc(zerodPoolNonce);
 
     function hashloop() {
         var challengeBytes = util.hexToBytes(challenge);
